@@ -1,0 +1,24 @@
+<div>
+  <app-page-title (search)="search($event)"></app-page-title>
+</div>
+  <div class="flex mt-6">
+    <input type="text" placeholder="Add Task" class="w-full h-16 px-4 py-2 rounded shadow" [(ngModel)]="newTask" (keydown.enter)="addTask()">
+  </div><br>
+  <div class=" text-red-600">{{errMsg}}</div>
+<div class="flex flex-col mt-6">
+  <h2 class="font-bold text-xl w-full">Tasks</h2>
+  <div class="border-solid border-2 border-red-600 text-red-500 shadow-md flex justify-center self-center font-bold rounded-md bg-red-200 text-lg px-4" *ngIf="taskList.length === 0">
+    <p >Your List is Empty</p>
+  </div>
+  <div *ngFor="let task of taskList"
+  class="justify-between pr-8 bg-white w-full h-16 px-4 py-2 rounded shadow flex items-center mt-2 mb-2">
+  <p>{{task.title}}</p>
+  <div class="flex gap-4 cursor-pointer">
+    <i [ngClass]="task.important?'text-yellow-400 bi bi-star-fill':'text-yellow-400 bi bi-star'"
+    (click)="markImportant(task.id,task)"></i>
+    <i [ngClass]="task.completed?'text-green-600 bi bi-check-circle-fill':'text-green-600 bi bi-check-circle'" (click)="markCompleted(task.id,task)"></i>
+    <i class="bi bi-trash text-red-500" (click)="deleteTask(task.id,task)"></i>
+    
+  </div>
+</div>
+</div>
